@@ -1,0 +1,41 @@
+num-clients = 200
+num-server-rounds = 200
+local-work-mode = "epochs"
+local-epochs = 5
+local-steps = 10
+clients-per-round = 20
+fraction-fit = 0.1
+min-available-clients = 20
+learning-rate-max = 0.01
+learning-rate-min = 0.001
+lr-warmup-rounds = 5
+learning-rate = 0.01
+global-lr = 1.0
+momentum = 0.9
+weight-decay = 0.0001
+comp-type = "topk"
+sparsify-by = 0.01
+alpha-r = 0.0
+H = 5
+reset-frac = 0.1
+seed = 42
+seed-list = "42,43,44"
+wandb-enabled = false
+wandb-project = "sapef_femnist"
+wandb-name = "femnist_natural_top001_fedavg"
+save-path = "results/femnist/natural_top001/fedavg/seed42/results.csv"
+track-metrics = false
+
+[model]
+name = "FEMNIST_CNN"
+num-classes = 62
+
+[dataset]
+name = "femnist"
+partitioning = "natural"
+batch-size = 32
+val-ratio = 0.1
+seed = 42
+
+[algorithm]
+name = "fedavg"

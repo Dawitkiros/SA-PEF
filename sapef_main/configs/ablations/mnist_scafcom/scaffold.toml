@@ -1,0 +1,43 @@
+num-clients = 200
+num-server-rounds = 200
+local-work-mode = "steps"
+local-steps = 10
+local-epochs = 5
+clients-per-round = 20
+fraction-fit = 0.1
+min-available-clients = 20
+learning-rate-max = 0.1
+learning-rate-min = 0.1
+lr-warmup-rounds = 0
+learning-rate = 0.1
+global-lr = 1.0
+momentum = 0.0
+weight-decay = 0.0
+comp-type = "none"
+sparsify-by = 0.0
+alpha-r = 0.0
+alpha-sc = 0.1
+beta-sc = 0.2
+H = 5
+reset-frac = 0.1
+seed = 42
+seed-list = "42,43,44"
+wandb-enabled = false
+wandb-project = "sapef_ablations"
+wandb-name = "mnist_scafcom_scaffold"
+save-path = "results/ablations/mnist_scafcom/scaffold/seed42/results.csv"
+track-metrics = false
+
+[model]
+name = "TwoLayerMLP"
+num-classes = 10
+
+[dataset]
+name = "mnist"
+partitioning = "shards"
+batch-size = 32
+val-ratio = 0.1
+seed = 42
+
+[algorithm]
+name = "scaffold"

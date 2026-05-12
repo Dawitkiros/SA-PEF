@@ -1,0 +1,115 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "sapef"
+version = "1.0.0"
+description = "SA-PEF: Step-Ahead Partial Error Feedback for Communication-Efficient Federated Learning"
+license = "MIT"
+dependencies = [
+    "flwr[simulation]>=1.22,<1.27",
+    "flwr-datasets>=0.5",
+    "torch>=2.5,<2.8",
+    "torchvision>=0.20,<0.23",
+    "numpy>=1.24",
+    "scipy>=1.11",
+    "matplotlib>=3.7",
+    "seaborn>=0.13",
+    "pandas>=2.0",
+    "easydict>=1.10",
+    "datasets>=3.0",
+    "huggingface-hub>=0.30",
+    "PyYAML>=6.0",
+]
+
+[project.optional-dependencies]
+tracking = ["wandb>=0.16"]
+
+[tool.flwr.app]
+publisher = "SA-PEF Team"
+
+[tool.flwr.app.components]
+serverapp = "sapef.server_app:app"
+clientapp = "sapef.client_app:app"
+
+# ===== Default Configuration (FLAT KEYS) =====
+[tool.flwr.app.config]
+num-clients = 10
+
+# Training
+num-server-rounds = 10
+local-epochs = 5
+local-steps = 10
+local-work-mode = "epochs"
+clients-per-round = 10
+
+# Optimization
+learning-rate-max = 0.01
+learning-rate-min = 0.003
+lr-warmup-rounds = 10
+momentum = 0.9
+weight-decay = 0.00001
+
+fraction-fit = 1.0
+fraction-evaluate= 0.0
+min-evaluate-clients= 0
+min-available-clients= 10
+stragglers-fraction = 0.0
+learning-rate = 0.03       # local lr (default)
+global-lr = 1.0          # global lr (default)
+seed = 42                # random seed for reproducibility
+seed-list = "42"         # comma-separated seed list (config-generator only; declared so Flower config validation accepts override)
+
+# Compression (flat keys!)
+comp-type = "topk"
+sparsify-by = 0.01
+alpha-r = 0.85
+alpha-sc = 0.1         # for scallion
+beta-sc = 0.2          # for scafcom
+H = 5                  # CSER reset period
+reset-frac = 0.1       # CSER digest fraction (C1)
+
+# Logging
+wandb-enabled = false
+wandb-project = "sa-pef"
+wandb-name = "SAPEF_Experiment"
+save-path = "results/default/results.csv"
+track-metrics = true
+metric-alpha = 1.0     # probe α for the gradient-mismatch metric
+
+# Theory
+L-est = 1.0
+
+
+
+[tool.flwr.app.config.algorithm]
+name = "sapef"  # sapef, ef, saef, fedavg
+
+
+
+[tool.flwr.app.config.dataset]
+name = "mnist"
+seed=42
+batch-size = 10
+val-ratio = 0.1
+mu = 1.0
+
+# mnist settings
+path = ""
+power-law = false
+num-unique-labels-per-partition = 2
+num-unique-labels = 10
+preassigned-num-samples-per-label = 5
+sigma = 2.0
+
+# cifar settings
+partitioning = "dirichlet"
+alpha = 0.5
+
+[tool.flwr.app.config.fit]
+drop-client = false # with FedProx, clients shouldn't be dropped even if they are stragglers
+
+[tool.flwr.app.config.model]
+name = "LogisticRegression"
+num-classes = 10

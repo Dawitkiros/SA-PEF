@@ -1,0 +1,42 @@
+num-clients = 100
+num-server-rounds = 200
+local-work-mode = "steps"
+local-steps = 5
+local-epochs = 5
+clients-per-round = 10
+fraction-fit = 0.1
+min-available-clients = 10
+learning-rate-max = 0.1
+learning-rate-min = 0.003
+lr-warmup-rounds = 5
+learning-rate = 0.1
+global-lr = 1.0
+momentum = 0.9
+weight-decay = 0.0005
+comp-type = "topk"
+sparsify-by = 0.01
+alpha-r = 1.0
+H = 5
+reset-frac = 0.1
+seed = 42
+seed-list = "42,43,44,45,46"
+wandb-enabled = false
+wandb-project = "sapef"
+wandb-name = "cifar100_alpha_1_0"
+save-path = "results/alpha_sweep/cifar100/alpha_1_0/seed42/results.csv"
+track-metrics = true
+
+[model]
+name = "ResNet18"
+num-classes = 100
+
+[dataset]
+name = "cifar100"
+partitioning = "dirichlet"
+alpha = 0.1
+batch-size = 64
+seed = 42
+val-ratio = 0.1
+
+[algorithm]
+name = "sapef"

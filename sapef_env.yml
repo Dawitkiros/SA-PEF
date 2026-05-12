@@ -1,0 +1,43 @@
+name: sapef
+channels:
+  - conda-forge
+dependencies:
+  - python=3.11
+  - pip
+  # heavy / native conda-forge builds
+  - numpy
+  - scipy
+  - pandas
+  - matplotlib
+  - pyyaml
+  - h5py
+  - pillow
+  - tqdm
+  - requests
+  # notebooks
+  - ipykernel
+  - jupyter_client
+  - jupyter_core
+
+  - pip:
+      # ML stack (pip resolves CUDA wheels for torch automatically)
+      - torch>=2.5,<2.8
+      - torchvision>=0.20,<0.23
+
+      # Federated learning runtime
+      - flwr[simulation]>=1.22,<1.27
+      - flwr-datasets>=0.5
+      - ray>=2.31
+
+      # HuggingFace datasets (FEMNIST loader)
+      - datasets>=3.0
+      - huggingface-hub>=0.30
+
+      # config / utilities
+      - easydict>=1.10
+
+      # plotting extras
+      - seaborn>=0.13
+
+      # optional experiment tracking — gated by `wandb-enabled` in configs
+      - wandb>=0.16

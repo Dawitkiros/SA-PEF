@@ -1,0 +1,42 @@
+num-clients = 4
+num-server-rounds = 2
+local-work-mode = "steps"
+local-steps = 1
+local-epochs = 1
+clients-per-round = 2
+fraction-fit = 0.5
+min-available-clients = 2
+learning-rate-max = 0.01
+learning-rate-min = 0.001
+lr-warmup-rounds = 5
+learning-rate = 0.01
+global-lr = 1.0
+momentum = 0.9
+weight-decay = 0.0005
+comp-type = "topk"
+sparsify-by = 0.1
+alpha-r = 1.0
+H = 5
+reset-frac = 0.1
+seed = 42
+seed-list = "42"
+wandb-enabled = false
+wandb-project = "sapef"
+wandb-name = "quick_test_cifar10_saef"
+save-path = "results/quick-test/saef_cifar10_tiny/results.csv"
+track-metrics = false
+
+[model]
+name = "ResNet9"
+num-classes = 10
+
+[dataset]
+name = "cifar10"
+partitioning = "dirichlet"
+alpha = 0.5
+batch-size = 16
+seed = 42
+val-ratio = 0.1
+
+[algorithm]
+name = "saef"

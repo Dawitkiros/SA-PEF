@@ -1,0 +1,105 @@
+figures:
+  cifar10_main:
+    name: cifar10_main
+    title: "CIFAR-10 / ResNet-9"
+    configs:
+      - configs/cifar10/*/*.toml
+    command: "flwr run . gpu-simulation -c <config>"
+    plot_script: "python scripts/plot_curves.py --figure cifar10_main"
+    x_axes: [round, comm_gb]
+    expected_output:
+      - figures/cifar10_main_round.pdf
+      - figures/cifar10_main_comm_gb.pdf
+
+  cifar100_main:
+    name: cifar100_main
+    title: "CIFAR-100 / ResNet-18"
+    configs:
+      - configs/cifar100/*/*.toml
+    command: "flwr run . gpu-simulation -c <config>"
+    plot_script: "python scripts/plot_curves.py --figure cifar100_main"
+    x_axes: [round, comm_gb]
+    expected_output:
+      - figures/cifar100_main_round.pdf
+      - figures/cifar100_main_comm_gb.pdf
+
+  alpha_ablation:
+    name: alpha_ablation
+    title: "Sensitivity to step-ahead coefficient alpha"
+    configs:
+      - configs/alpha_sweep/cifar10/*.toml
+      - configs/alpha_sweep/cifar100/*.toml
+    datasets:
+      cifar10:
+        - configs/alpha_sweep/cifar10/*.toml
+      cifar100:
+        - configs/alpha_sweep/cifar100/*.toml
+    command: "flwr run . gpu-simulation -c <config>"
+    plot_script: "python scripts/plot_alpha_sweep.py"
+    expected_output:
+      - figures/alpha_sweep_cifar10.pdf
+      - figures/alpha_sweep_cifar100.pdf
+
+  fig_mismatch:
+    name: fig_mismatch
+    title: "Gradient mismatch"
+    configs:
+      - configs/gradient_mismatch/cifar10/*.toml
+      - configs/gradient_mismatch/cifar100/*.toml
+    datasets:
+      cifar10:
+        - configs/gradient_mismatch/cifar10/*.toml
+      cifar100:
+        - configs/gradient_mismatch/cifar100/*.toml
+    command: "flwr run . gpu-simulation -c <config>"
+    plot_script: "python scripts/plot_gradient_mismatch.py"
+    expected_output:
+      - figures/gradient_mismatch_cifar10.pdf
+      - figures/gradient_mismatch_cifar100.pdf
+
+  femnist:
+    name: femnist
+    title: "FEMNIST"
+    configs:
+      - configs/femnist/*/*.toml
+    command: "flwr run . gpu-simulation -c <config>"
+    plot_script: "python scripts/plot_curves.py --figure femnist"
+    x_axes: [round, comm_gb]
+    expected_output:
+      - figures/femnist_round.pdf
+      - figures/femnist_comm_gb.pdf
+
+  mnist_scafcom:
+    name: mnist_scafcom
+    title: "MNIST / 2-layer FC — comparison with SCAFCOM"
+    configs:
+      - configs/ablations/mnist_scafcom/*.toml
+    command: "flwr run . gpu-simulation -c <config>"
+    plot_script: "python scripts/plot_curves.py --figure mnist_scafcom"
+    x_axes: [round, comm_gb]
+    expected_output:
+      - figures/mnist_scafcom_round.pdf
+      - figures/mnist_scafcom_comm_gb.pdf
+
+  cifar10_scafcom:
+    name: cifar10_scafcom
+    title: "CIFAR-10 / ResNet-9 — comparison with SCAFCOM"
+    configs:
+      - configs/ablations/cifar10_scafcom_top001/*.toml
+      - configs/ablations/cifar10_scafcom_top010/*.toml
+    command: "flwr run . gpu-simulation -c <config>"
+    plot_script: "python scripts/plot_curves.py --figure cifar10_scafcom"
+    x_axes: [round, comm_gb]
+    expected_output:
+      - figures/cifar10_scafcom_top001_round.pdf
+      - figures/cifar10_scafcom_top001_comm_gb.pdf
+      - figures/cifar10_scafcom_top010_round.pdf
+      - figures/cifar10_scafcom_top010_comm_gb.pdf
+
+  quick_test:
+    name: quick_test
+    title: "CIFAR-10 tiny quick test"
+    configs:
+      - configs/quick-test/*.toml
+    command: "flwr run . quick-test -c <config>"
+    plot_script: null
