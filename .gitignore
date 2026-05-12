@@ -1,0 +1,51 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info/
+.eggs/
+build/
+dist/
+
+# Envs
+.venv/
+venv/
+env/
+.env
+
+# Jupyter
+.ipynb_checkpoints/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editors
+.vscode/
+.idea/
+*.swp
+
+# Local-only files
+local_files/
+
+# Run artifacts
+checkpoints/
+**/checkpoints/
+sapef_main/data/
+sapef_main/figures/
+sapef_main/logs/
+sapef_main/results/
+sapef_main/wandb/
+sapef_main/outputs/
+
+# Large/binary
+*.pt
+*.pth
+*.ckpt
+*.npz
+*.npy
+*.h5
+*.hdf5
+*.log
